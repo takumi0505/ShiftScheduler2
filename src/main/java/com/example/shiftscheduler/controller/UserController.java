@@ -29,16 +29,6 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user != null) {
-            user.setName(userDetails.getName());
-            return userRepository.save(user);
-        }
-        return null;
-    }
-
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
