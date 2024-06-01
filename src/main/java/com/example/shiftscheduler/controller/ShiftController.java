@@ -1,5 +1,6 @@
 package com.example.shiftscheduler.controller;
 
+import com.example.shiftscheduler.dto.ShiftRequest;
 import com.example.shiftscheduler.entity.Shift;
 import com.example.shiftscheduler.repository.ShiftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,10 @@ public class ShiftController {
     }
 
     @PostMapping("/auto-generate")
-    public void autoGenerateShifts(@RequestBody List<LocalDate> dates, @RequestBody List<Long> userIds) {
+    public void autoGenerateShifts(@RequestBody ShiftRequest shiftRequest) {
+        List<LocalDate> dates = shiftRequest.getDates();
+        List<Long> userIds = shiftRequest.getUserIds();
+
         for (LocalDate date : dates) {
             for (Long userId : userIds) {
                 Shift shift = new Shift();
